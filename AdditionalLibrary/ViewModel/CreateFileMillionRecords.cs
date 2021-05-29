@@ -23,9 +23,10 @@ namespace AdditionalLibrary
         {
             // Создаем гуид, для индекса клиенту.
             Guid clientIndex;
-
-            // Создаем переменную для кол-во счетов у клиента.
-            //int accountCount = 0;
+            
+            // Если директории нет, тогда создаем ее.
+            if(!Directory.Exists(path))
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
 
             using (FileStream fs = new FileStream(path, FileMode.Create))
             {

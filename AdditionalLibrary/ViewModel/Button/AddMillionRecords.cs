@@ -24,7 +24,7 @@ namespace AdditionalLibrary
         public static async Task AutoCreateFile()
         {
             // Переменная для кол-во записей.
-            int numOfRecords = 1_000_000;
+            int numOfRecords = 3_000_000;
 
             // Записываем кол-во файлов. (в каждом файле по 500 тыс. клиентов).
             int numOfFile = numOfRecords / 200_000;
@@ -77,7 +77,7 @@ namespace AdditionalLibrary
             });
 
             // Показываем, что создание файлов завершено.
-            MessageBox.Show("Файлы с 1 000 000 млн. записями создались.","Создание файлов.");
+            MessageBox.Show("Файлы с 3 000 000 млн. записями создались.","Создание файлов.");
         }
 
         /// <summary>
