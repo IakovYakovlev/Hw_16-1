@@ -7,10 +7,10 @@ namespace AdditionalLibrary
     public class Fill : IButtonListener
     {
         // Создаем список клиентов.
-        public static ObservableCollection<Clients> client;
+        public static RangeObservableCollection<Clients> client;
 
         // Создаем список счетов.
-        public static ObservableCollection<Accounts> account;
+        public static RangeObservableCollection<Accounts> account;
 
         // Создаем рандом.
         static Random random;
@@ -20,8 +20,8 @@ namespace AdditionalLibrary
         /// </summary>
         static Fill()
         {
-            client = new ObservableCollection<Clients>();
-            account = new ObservableCollection<Accounts>();
+            client = new RangeObservableCollection<Clients>();
+            account = new RangeObservableCollection<Accounts>();
             random = new Random();
         }
 

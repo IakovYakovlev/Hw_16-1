@@ -7,10 +7,6 @@ namespace AdditionalLibrary
     /// </summary>
     class RandomDepositType
     {
-
-        // Создаем рандом.
-        static Random random = new Random();
-
         /// <summary>
         /// Метод для случайного типа депозита.
         /// </summary>
@@ -18,7 +14,7 @@ namespace AdditionalLibrary
         public static DepositType RandomType()
         {
             // Записываем случайную цифру.
-            int clientType = random.Next(1, 3);
+            int clientType = StaticRandom.Rand(1, 3);
 
             switch (clientType)
             {

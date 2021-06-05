@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace AdditionalLibrary
 {
@@ -7,9 +8,6 @@ namespace AdditionalLibrary
     /// </summary>
     class RandomCreditType
     {
-        // Создаем рандом.
-        static Random random = new Random();
-
         /// <summary>
         /// Метод для случайного типа кредитной истории.
         /// </summary>
@@ -17,7 +15,7 @@ namespace AdditionalLibrary
         public static CreditHistoryType RandomType()
         {
             // Записываем случайную цифру.
-            int creditType = random.Next(1, 4);
+            int creditType = StaticRandom.Rand(1, 4);
 
             switch (creditType)
             {
@@ -28,6 +26,8 @@ namespace AdditionalLibrary
                 default:
                     return CreditHistoryType.Bad;
             }
+
+            
         }
     }
 }

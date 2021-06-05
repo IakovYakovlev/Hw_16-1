@@ -10,9 +10,6 @@ namespace AdditionalLibrary
     /// </summary>
     class CreateFileMillionRecords
     {
-        // Создаем рандом.
-        static Random random = new Random(Thread.CurrentThread.ManagedThreadId);
-
         /// <summary>
         /// Метод для создания файла и внесения информации о клиентах и их счетах.
         /// </summary>
@@ -21,12 +18,15 @@ namespace AdditionalLibrary
         /// <param name="path"></param>
         public static void WritingToFile(int start, int end, string path)
         {
-            // Создаем гуид, для индекса клиенту.
-            Guid clientIndex;
-            
+            // Записываем в переменную только папку.
+            string folder = path.Split('/')[0];
+
             // Если директории нет, тогда создаем ее.
-            if(!Directory.Exists(path))
+            if (!Directory.Exists(folder))
                 Directory.CreateDirectory(Path.GetDirectoryName(path));
+            
+            // Гуид для номера клиента.
+            Guid g;
 
             using (FileStream fs = new FileStream(path, FileMode.Create))
             {
@@ -35,8 +35,24 @@ namespace AdditionalLibrary
                     // Записываем клиента.
                     for(int i = start; i < end; i++)
                     {
+                        // Создаем рандомные типы для клиентов и счетов.
+                        ClientsType clType = RandomClientsType.RandomType();
+                        CreditHistoryType credType = RandomCreditType.RandomType();
+
+                        // Записываем новый-уникальный номер клиента.
+                        g = Guid.NewGuid();
+
+                        // Записываем в переменную кол-во счетов у клиента.
+                        int numAccounts = StaticRandom.Rand(1, 6);
+
                         // Записываем клиента в файл.
-                        sw.Write($"Клиент нр. {i + 1};{RandomClientsType.RandomType()};{RandomCreditType.RandomType()};\n");
+                        sw.Write($"Клиент;{g};Клиент нр. {i + 1};{clType};{credType}\n");
+
+                        // Сохраняем счета в файл.
+                        for(int j = 0; j < numAccounts; j++)
+                        {
+                            sw.WriteLine($"Счет;{g};{RandomDepositAmount.GetRandomDepositAmount()};{RandomDepositType.RandomType()}");
+                        }
                     }
                 }
             }

@@ -24,10 +24,7 @@ namespace AdditionalLibrary
         public static async Task AutoCreateFile()
         {
             // Переменная для кол-во записей.
-            int numOfRecords = 3_000_000;
-
-            // Записываем кол-во файлов. (в каждом файле по 500 тыс. клиентов).
-            int numOfFile = numOfRecords / 200_000;
+            int numOfRecords = 1_000_000;
 
             // Запсываем кол-во потоков.
             int numThreads = (int)Environment.ProcessorCount;
@@ -36,10 +33,10 @@ namespace AdditionalLibrary
             Thread[] threads = new Thread[numThreads];
 
             // Получаем целое для дальнейшего деления на потоки.
-            int chunk = GCD(numOfFile, numThreads);
+            int chunk = GCD(numOfRecords, numThreads);
 
             // Переменная для определения диапазона в каждом потоке.
-            int zend = (numOfFile - chunk + (chunk / numThreads)) - (chunk / numThreads);
+            int zend = (numOfRecords - chunk + (chunk / numThreads)) - (chunk / numThreads);
 
             // Переменная для записи начала в каждом потоке.
             int start = 0;
@@ -55,13 +52,13 @@ namespace AdditionalLibrary
                     // Присваиваем значение для следующей итерации.
                     start = chunkEnd;
 
+                    // Присваиваем номер файла с клиентами.
+                    int filesClietnNumber = i + 1;
+
                     // Создаем поток.
                     threads[i] = new Thread(() =>
                     {
-                        for (int j = chunkStart; j < chunkEnd; j++)
-                        {
-                            CreateFileMillionRecords.WritingToFile(0, 200_000, $"Client/Clients{j + 1}.txt");
-                        }
+                        CreateFileMillionRecords.WritingToFile(chunkStart, chunkEnd, $"Client/{filesClietnNumber}_Clients.txt");
                     });
 
                     // Стартуем поток.
@@ -77,7 +74,7 @@ namespace AdditionalLibrary
             });
 
             // Показываем, что создание файлов завершено.
-            MessageBox.Show("Файлы с 3 000 000 млн. записями создались.","Создание файлов.");
+            MessageBox.Show("Файлы с 1 000 000 млн. записями создались.","Создание файлов.");
         }
 
         /// <summary>
@@ -108,9 +105,9 @@ namespace AdditionalLibrary
         /// <summary>
         /// Реализация интерфейса IButtonListener.
         /// </summary>
-        public void ButtonPressed()
+        public async void ButtonPressed()
         {
-            AutoCreateFile();
+            await AutoCreateFile();
         }
     }
 }

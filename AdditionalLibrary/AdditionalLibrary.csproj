@@ -68,6 +68,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModel\Random\StaticRandom.cs" />
+    <Compile Include="ViewModel\RangeObservableCollection.cs" />
     <Compile Include="ViewModel\ActionsMessage.cs" />
     <Compile Include="ViewModel\Button\ButtonAdapter.cs" />
     <Compile Include="ViewModel\Button\AddMillionRecords.cs" />
@@ -84,7 +86,7 @@
     <Compile Include="ViewModel\Random\RandomCreditType.cs" />
     <Compile Include="ViewModel\Random\RandomDepositAmount.cs" />
     <Compile Include="ViewModel\Random\RandomDepositType.cs" />
-    <Compile Include="ViewModel\ReadFileMillionRecords.cs" />
+    <Compile Include="ViewModel\Button\ReadFileMillionRecords.cs" />
     <Compile Include="View\FLoan.xaml.cs">
       <DependentUpon>FLoan.xaml</DependentUpon>
     </Compile>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace AdditionalLibrary
 {
@@ -7,9 +8,6 @@ namespace AdditionalLibrary
     /// </summary>
     class RandomClientsType
     {
-        // Создаем рандом.
-        static Random random = new Random();
-
         /// <summary>
         /// Метод для случайного типа клиента.
         /// </summary>
@@ -17,7 +15,7 @@ namespace AdditionalLibrary
         public static ClientsType RandomType()
         {
             // Записываем случайную цифру.
-            int clientType = random.Next(1, 4);
+            int clientType = StaticRandom.Rand(1, 4);
 
             switch (clientType)
             {
